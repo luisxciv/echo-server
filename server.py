@@ -1,8 +1,7 @@
 from bottle import Bottle, request, response, run
-from json import dumps
-import json
 
 app = Bottle()
+
 
 @app.hook('after_request')
 def enable_cors():
@@ -11,27 +10,44 @@ def enable_cors():
     Don't use the wildcard '*' for Access-Control-Allow-Origin in production.
     """
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, PATCH, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 
-@app.route('/data', method=['OPTIONS', 'GET', 'POST', 'DELETE', 'PATCH', 'PUT'])
+
+@app.route('/data', method=['OPTIONS', 'GET', 'POST', 'DELETE', 'PUT', 'PATCH'])
 def data():
-    """
-    """
-    response.content_type = 'application/json'
-    if request.method == 'GET' or 'DELETE':
-            data = request.body.read()
-            try:
-                rv = {"method": request.method, "data": json.loads(data.decode('utf-8'))}
-            except:
-                raise ValueError('Data formatted incorrectly')
-            return dumps(rv)
-    else:
-        return dumps({"method": request.method, "data": request.json})
+    if request.method == 'OPTIONS':
+        response.status = 200
+        return {''}
+    elif request.method == 'GET':
+        return {'method': request.method, 'data': 'GET data'}
+    elif request.method == 'POST':
+        data = request.json.get('data')
+        return {'method': request.method, 'data': data}
+    elif request.method == 'DELETE':
+        return {'method': request.method, 'data': 'DELETE data'}
+    elif request.method == 'PUT':
+        data = request.json.get('data')
+        return {'method': request.method, 'data': data}
+    elif request.method == 'PATCH':
+        data = request.json.get('data')
+        return {'method': request.method, 'data': data}
+
+
+@app.route('/data/<data>', method=['OPTIONS', 'GET', 'POST', 'DELETE', 'PUT', 'PATCH'])
+def data(data):
+    if request.method == 'OPTIONS':
+        response.status = 200
+        return {'test'}
+    elif request.method == 'DELETE':
+        return {'method': request.method, 'data': data}
+    elif request.method == 'GET':
+        return {'method': request.method, 'data': data}
 
 
 if __name__ == '__main__':
     from optparse import OptionParser
+
     parser = OptionParser()
     parser.add_option("--host", dest="host", default="localhost",
                       help="hostname or ip address", metavar="host")
