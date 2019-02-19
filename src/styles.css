@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+body {
+    /* background-color: #8cdb95; */
+    background-color: #7395AE;
+}
+
+.btn-primary {
+    background-color: #05386b;
+    min-width: 110px;
+    min-height: 45px;
+    font-size: 1.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #FFF;
+}
+
+label {
+    color: #FFF;
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+pre {
+    color: #FFF;
+    font-size: 1.2em;
+}
+
+.ms {
+    color: #8EE4Af;
+    font-size: 1.01em;
+}
+
+.response-container {
+    border: 3px solid #fff;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-left: 30px;
+}

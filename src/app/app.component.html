@@ -1,0 +1,48 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>POSTMAN MVP</h2>
+    </div>
+  </div>
+  <form>
+    <div class="row mt-4">
+      <div class="col-md-4 offset-md-2">
+        <div class="form-group">
+          <label for="methodsList">Method</label>
+          <select [(ngModel)]="method" class="form-control" id="methodsList" [ngModelOptions]="{standalone: true}">
+            <option>GET</option>
+            <option>POST</option>
+            <option>PUT</option>
+            <option>DELETE</option>
+            <option>PATCH</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="data">Data</label>
+          <input [(ngModel)]="data" type="text" class="form-control" id="data" placeholder="Enter Data"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-md-2">
+        <button type="submit" class="btn btn-primary" (click)="handleSubmit()">Send</button>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-3">
+    <div *ngIf="getResponse" class="col-md-8 offset-md-2 response-container">
+      <div class="row">
+        <div *ngIf="getResponse" class="col-md-9">
+          <h3>Body</h3>
+          <pre>{{getResponse | json}}</pre>
+        </div>
+        <div *ngIf="responseTime" class="col-md-3">
+          <h5>Response Time: &nbsp; <span class="ms">{{responseTime}}ms</span></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
