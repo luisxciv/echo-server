@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DataService {
 
   // BASE_URL = 'http://localhost:8080/data';
-  BASE_URL = 'http://127.0.0.1:8083/data';
+  BASE_URL = 'http://127.0.0.1:8080/data';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class DataService {
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
       'Access-Control-Allow-Origin': '*'
-    })
+    });
     const url = this.BASE_URL + '/' + data;
     return this.http.get(url, { headers });
   }
