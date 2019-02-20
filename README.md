@@ -1,4 +1,4 @@
-npm install -g @angular/cli" and then run "ng serve -o
+npm install @angular/cli" and then run "ng serve -o
 
 tested with this cors extension.
 
